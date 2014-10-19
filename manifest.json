@@ -1,0 +1,30 @@
+{
+  "name": "Block Reddit Trolls",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "description": "Sick of 'le reddit trolls' on youtube, so... b&'n them",
+  "homepage_url": "http://www.none.com",
+  "permissions": ["storage"],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "page": "src/bg/background.html",
+    "persistent": true
+  },
+  "options_page": "src/bg/options.html",
+  "content_scripts": [ 
+    {
+      "matches": [
+        "https://apis.google.com/*"
+      ],
+	  "all_frames":true,
+      "js": [
+        "src/inject/inject.js"
+      ]
+    } 
+  ]
+}
