@@ -12,10 +12,37 @@ function addJQuery(callback) {
 }
 
 addJQuery(function(myItems) {   
+		var removeComments = function(itms) {	
+			console.log("Removing Comments");
+			$(".Ct").filter(function() { 
+				console.log($(this).text());
+				for(var i=0;i<itms.length;i++) {			
+					if(($(this).text().indexOf(itms[i]) > -1)) {
+						return true;
+					}
+				}
+				return false;
+			}).each(function() { console.log('removed one'); $(this).closest('.ju').remove();});
+		}
 		console.log('posting');
 		console.log(myItems);
 		var items = myItems.split(',');
-		for(var i=0;i<items.length;i++) {
-			$(".Ct:contains('" + items[i] + "')").closest('.ju').remove(); 
-		}
+		removeComments(items); 
+		var replyBtns = $("span.d-s").filter(function() { 
+									return ($(this).text().indexOf('replies') > -1);
+								});  
+		replyBtns.bind('click', function(e) { 
+			console.log('reply hit');
+			removeComments(items); 
+		});
+		var showBtn = $("span").filter(function() { 
+			return ($(this).text().indexOf('Show more') > -1);
+		});
+		showBtn.bind('click', function(e) {
+			console.log('show button hit');
+			setTimeout(function(){
+				debugger;
+				removeComments(items);
+			}, 3000);			
+		});
 });
